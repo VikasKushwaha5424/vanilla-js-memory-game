@@ -1,0 +1,199 @@
+/* ✨ COLOR VARIABLES */
+:root {
+    --bg-color: #FFE4B5;      /* Pastel Orange */
+    --panel-bg: #ffffff;      /* White */
+    --text-color: #FF6B9D;    /* Pink */
+    --card-cover: #98D8C8;    /* Mint Green */
+    --card-border: #ffffff;
+    --btn-bg: #FF6B9D;
+    --shadow: #d4a574;
+}
+
+/* ✨ DARK MODE VARIABLES */
+[data-theme="dark"] {
+    --bg-color: #2d3436;      /* Dark Grey */
+    --panel-bg: #444b4d;      /* Light Grey */
+    --text-color: #fdcb6e;    /* Gold */
+    --card-cover: #6c5ce7;    /* Purple */
+    --card-border: #2d3436;
+    --btn-bg: #fdcb6e;
+    --shadow: #000000;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    min-height: 100vh;
+    transition: background 0.3s;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* --- SETTINGS PANEL --- */
+.settings-panel {
+    background: var(--panel-bg);
+    padding: 20px;
+    border-radius: 20px;
+    border: 5px solid var(--card-border);
+    box-shadow: 0 8px 0 var(--shadow);
+    margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+select {
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 3px solid var(--text-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Nunito', sans-serif;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    outline: none;
+}
+
+/* --- GAME BOARD --- */
+.game-board {
+    display: grid;
+    gap: 10px;
+    perspective: 1000px;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.card {
+    background: transparent;
+    aspect-ratio: 1;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card.flipped, .card.matched { transform: rotateY(180deg); }
+.card.matched { cursor: default; }
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid var(--card-border);
+    box-shadow: 0 4px 0 var(--shadow);
+    overflow: hidden;
+}
+
+.card-front { 
+    background: var(--card-cover); 
+    color: white; 
+    font-size: 2.5em; 
+}
+
+.card-back { 
+    background: white; 
+    transform: rotateY(180deg); 
+}
+
+.card-back img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+/* --- HEADER & BUTTONS --- */
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background: var(--panel-bg);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 4px solid var(--card-border);
+}
+
+.btn {
+    background: var(--btn-bg);
+    color: white; /* Button text is always white/dark depending on variable */
+    color: var(--bg-color); /* Matches background for high contrast */
+    color: #fff; /* Force white for cuteness, or use var(--card-border) */
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 5px 0 var(--shadow);
+    font-family: inherit;
+    transition: transform 0.1s;
+}
+
+/* Fix text color for dark mode buttons */
+[data-theme="dark"] .btn { color: #2d3436; }
+
+.btn:active { transform: translateY(4px); box-shadow: none; }
+
+.theme-btn {
+    position: absolute; 
+    top: 0px; 
+    right: 0px;
+    width: 45px; 
+    height: 45px; 
+    border-radius: 50%;
+    padding: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    border: 4px solid var(--card-border);
+}
+
+/* --- MODAL --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 100;
+}
+
+.modal.show { display: flex; }
+
+.modal-content {
+    background: var(--panel-bg); 
+    padding: 40px; 
+    border-radius: 30px;
+    text-align: center; 
+    border: 5px solid var(--text-color); 
+    animation: pop 0.4s;
+}
+
+@keyframes pop { 
+    0% { transform: scale(0); } 
+    100% { transform: scale(1); } 
+}
+
+/* --- RESPONSIVE --- */
+@media(max-width: 600px) {
+    .settings-panel { flex-direction: column; }
+    .header-info { flex-direction: column; gap: 10px; }
+    h1 { margin-top: 50px; font-size: 2em; }
+}

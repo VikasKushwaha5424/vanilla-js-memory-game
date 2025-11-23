@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Match Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <button class="btn theme-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
+    
+    <h1 style="text-align: center; margin-bottom: 20px; font-size: 2.5em;">Memory Match</h1>
+
+    <div class="settings-panel">
+        <div>
+            <label>Category:</label>
+            <select id="categorySelect" onchange="startGame()">
+                <option value="cats">🐱 Cats</option>
+                <option value="dogs">🐶 Dogs</option>
+                <option value="marvels">🛡️ Marvels</option>
+                <option value="space">🌌 Space</option>
+            </select>
+        </div>
+        <div>
+            <label>Difficulty:</label>
+            <select id="gridSelect" onchange="startGame()">
+                <option value="3,4">Very Easy (3x4)</option>
+                <option value="4,4" selected>Easy (4x4)</option>
+                <option value="4,5">Medium (4x5)</option>
+                <option value="6,6">Hard (6x6)</option>
+            </select>
+        </div>
+        <button class="btn" onclick="startGame()">Restart</button>
+    </div>
+
+    <div class="header-info">
+        <h3>Moves: <span id="moves">0</span></h3>
+        <h3>Time: <span id="time">0:00</span></h3>
+    </div>
+
+    <div class="game-board" id="gameBoard"></div>
+</div>
+
+<div class="modal" id="winModal">
+    <div class="modal-content">
+        <h2>You Won! 🎉</h2>
+        <p>Moves: <span id="finalMoves">0</span> | Time: <span id="finalTime">0:00</span></p>
+        <br>
+        <button class="btn" onclick="closeModal()">Play Again</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
